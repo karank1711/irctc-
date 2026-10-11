@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_1.xsd"
+         version="6.1"
+         metadata-complete="false">
+
+    <display-name>IRCTC Admin Dashboard</display-name>
+
+    <listener>
+        <listener-class>com.irctc.listener.AppStartupListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>requestGuard</filter-name>
+        <filter-class>com.irctc.filter.RequestGuardFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>requestGuard</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>auth</servlet-name>
+        <servlet-class>com.irctc.controller.AuthController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>auth</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>auth</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>dashboard</servlet-name>
+        <servlet-class>com.irctc.controller.DashboardController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>dashboard</servlet-name><url-pattern>/dashboard</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>dashboard</servlet-name><url-pattern>/api/dashboard/bookings</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>bookings</servlet-name>
+        <servlet-class>com.irctc.controller.BookingController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>bookings</servlet-name><url-pattern>/bookings</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>bookings</servlet-name><url-pattern>/bookings/new</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>bookings</servlet-name><url-pattern>/bookings/save</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>bookings</servlet-name><url-pattern>/bookings/view</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>bookings</servlet-name><url-pattern>/bookings/cancel</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>users</servlet-name>
+        <servlet-class>com.irctc.controller.UserController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>users</servlet-name><url-pattern>/users</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>users</servlet-name><url-pattern>/users/new</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>users</servlet-name><url-pattern>/users/edit</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>users</servlet-name><url-pattern>/users/view</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>users</servlet-name><url-pattern>/users/save</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>users</servlet-name><url-pattern>/users/status</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>employees</servlet-name>
+        <servlet-class>com.irctc.controller.EmployeeController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>employees</servlet-name><url-pattern>/employees</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>employees</servlet-name><url-pattern>/employees/new</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>employees</servlet-name><url-pattern>/employees/edit</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>employees</servlet-name><url-pattern>/employees/view</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>employees</servlet-name><url-pattern>/employees/save</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>employees</servlet-name><url-pattern>/employees/status</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>trains</servlet-name>
+        <servlet-class>com.irctc.controller.TrainController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>trains</servlet-name><url-pattern>/trains</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>trains</servlet-name><url-pattern>/trains/new</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>trains</servlet-name><url-pattern>/trains/edit</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>trains</servlet-name><url-pattern>/trains/view</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>trains</servlet-name><url-pattern>/trains/save</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>trains</servlet-name><url-pattern>/trains/status</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>trains</servlet-name><url-pattern>/trains/schedule</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>trains</servlet-name><url-pattern>/trains/schedule/save</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>trains</servlet-name><url-pattern>/trains/schedule/delete</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>services</servlet-name>
+        <servlet-class>com.irctc.controller.ServiceController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>services</servlet-name><url-pattern>/services</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>reports</servlet-name>
+        <servlet-class>com.irctc.controller.ReportController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>reports</servlet-name><url-pattern>/reports</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>reports</servlet-name><url-pattern>/reports/export</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>settings</servlet-name>
+        <servlet-class>com.irctc.controller.SettingsController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>settings</servlet-name><url-pattern>/settings</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>profile</servlet-name>
+        <servlet-class>com.irctc.controller.ProfileController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>profile</servlet-name><url-pattern>/profile</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>content</servlet-name>
+        <servlet-class>com.irctc.controller.ContentController</servlet-class>
+        <multipart-config>
+            <max-file-size>2097152</max-file-size>
+            <max-request-size>3145728</max-request-size>
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/banner</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/actions</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/actions/save</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/actions/delete</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/classes</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/classes/save</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/announcements</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/announcements/save</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/announcements/delete</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/statistics</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/routes</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>content</servlet-name><url-pattern>/manage/routes/station</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>media</servlet-name>
+        <servlet-class>com.irctc.controller.MediaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>media</servlet-name><url-pattern>/media/*</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>activities</servlet-name>
+        <servlet-class>com.irctc.controller.ActivityController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>activities</servlet-name><url-pattern>/activities</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>activities</servlet-name><url-pattern>/notifications/read</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>activities</servlet-name><url-pattern>/api/notifications/read</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>search</servlet-name>
+        <servlet-class>com.irctc.controller.SearchController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>search</servlet-name><url-pattern>/search</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>search</servlet-name><url-pattern>/api/search</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>info</servlet-name>
+        <servlet-class>com.irctc.controller.InfoController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>info</servlet-name><url-pattern>/privacy</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>info</servlet-name><url-pattern>/terms</url-pattern></servlet-mapping>
+    <servlet-mapping><servlet-name>info</servlet-name><url-pattern>/help</url-pattern></servlet-mapping>
+
+    <servlet>
+        <servlet-name>error</servlet-name>
+        <servlet-class>com.irctc.controller.ErrorController</servlet-class>
+    </servlet>
+    <servlet-mapping><servlet-name>error</servlet-name><url-pattern>/error</url-pattern></servlet-mapping>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <name>IRCTCSESSION</name>
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error</location>
+    </error-page>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>

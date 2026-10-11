@@ -1,0 +1,3 @@
+-- Sample business data is not loaded.
+-- Dashboard totals, charts, bookings, routes, and activities come from records
+-- created through the admin panel. Administrator setup stays in the application.

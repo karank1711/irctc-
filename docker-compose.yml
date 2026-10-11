@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mysql:8.4
+    container_name: irctc-admin-mysql
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: irctc_admin
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    volumes:
+      - irctc-mysql-data:/var/lib/mysql
+
+volumes:
+  irctc-mysql-data:
