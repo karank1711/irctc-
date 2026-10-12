@@ -5,8 +5,9 @@ Java MVC application for a local IRCTC administration portal. Pages are JSP file
 ## Requirements
 
 - JDK 17 or newer (the project compiles to Java 17)
-- Apache Maven 3.9+
-- MySQL 8, either installed locally or started with Docker Compose
+- Docker Desktop, running, for the included MySQL 8.4 database
+
+Maven is not installed separately. `mvnw.cmd` downloads Maven 3.9.9 on first use, which needs internet access. Node.js and npm are not required. The server is embedded Tomcat, started by `com.irctc.ServerMain`.
 
 ## Configure the environment
 
@@ -28,13 +29,7 @@ The real `.env` file is listed in `.gitignore`. Do not commit it.
 
 ### Docker database
 
-If port 3306 is already used by another MySQL server, the included Compose file publishes MySQL on port 3307. Point `DB_URL` at `127.0.0.1:3307` and set `DB_PASSWORD` before starting:
-
-```text
-docker compose up -d
-```
-
-Compose reads `DB_PASSWORD` from `.env` and uses it as the MySQL root password.
+The startup command below starts MySQL from `docker-compose.yml`. That file publishes MySQL on host port `3307` so it can run beside another MySQL server on port `3306`. Set `DB_URL` to `127.0.0.1:3307` and set `DB_PASSWORD` before starting. Compose uses `DB_PASSWORD` as the MySQL root password. Data stays in the Docker volume `irctc-mysql-data`.
 
 ### Sample data
 
@@ -48,20 +43,26 @@ DELETE FROM app_settings WHERE setting_key = 'data_mode';
 
 ## Run
 
-From the project root:
+From the project root, with Docker Desktop already running:
 
 ```text
-mvn test
-mvn compile exec:java
+.\mvnw.cmd -Plocal -DskipTests compile exec:java
 ```
+
+That command starts the Compose service `db` (`mysql:8.4`, container `irctc-admin-mysql`), waits up to 120 seconds until its health check passes, compiles the project, and starts embedded Tomcat. Plain `.\mvnw.cmd -DskipTests compile exec:java` compiles and starts Tomcat only. It does not start MySQL, so it is not the command to use for a first run.
+
+`DB_URL` in `.env` must use host port `3307`, which is the port Compose publishes. The application port stays `PORT` from `.env`, default `8080`.
 
 Open http://localhost:8080/login and sign in with the administrator email and password from your `.env` file.
 
-A deployable WAR is created with:
+Other wrapper commands, from the same folder:
 
 ```text
-mvn package
+.\mvnw.cmd test
+.\mvnw.cmd -DskipTests package
 ```
+
+`package` writes `target/irctc-admin.war`. It does not start MySQL.
 
 Deploy `target/irctc-admin.war` to Tomcat 11. The Tomcat process also needs the same environment variables, or a `.env` file in its working directory.
 

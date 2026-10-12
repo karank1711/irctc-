@@ -10,7 +10,7 @@
     <meta name="robots" content="noindex">
     <title>Sign in · IRCTC Admin</title>
     <link rel="icon" href="${ctx}/favicon.svg">
-    <link rel="stylesheet" href="${ctx}/assets/css/app.css">
+    <link rel="stylesheet" href="${ctx}/assets/css/app.css?v=6">
 </head>
 <body class="login-body">
 <main class="login-card">

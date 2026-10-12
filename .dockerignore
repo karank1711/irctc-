@@ -1,0 +1,9 @@
+.git
+.idea
+.env
+target
+tomcat.8080
+data
+node_modules
+*.log
+*.iml
